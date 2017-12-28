@@ -6,10 +6,10 @@ $page = $_SERVER['PHP_SELF'];
 $sec = "360";
 
 $testArray=
-      $trelloUrl=file_get_contents("https://api.trello.com/1/lists/[List_Id]/cards?fields=name&key=[Trello_Api_Key]&token=[Trello_Api_Token]");
-      $urlContents = file_get_contents("https://www.rescuetime.com/anapi/data?key=[Rescue_Time_Api_Key]&perspective=rank&interval=hour&restrict_begin=".date('Y-m-d')."&restrict_end=".date('Y-m-d')."&format=json");
-      $urlContentsY = file_get_contents("https://www.rescuetime.com/anapi/data?key=[Rescue_Time_Api_Key]&perspective=rank&interval=hour&restrict_begin=".date('d.m.Y',strtotime("-1 days"))."&restrict_end=".date('d.m.Y',strtotime("-1 days"))."&format=json");
-      $urlContents2 = file_get_contents("https://www.rescuetime.com/anapi/daily_summary_feed?key=[Rescue_Time_Api_Key]");
+      $trelloUrl=file_get_contents("https://api.trello.com/1/lists/[list_number]/cards?fields=name&key=[API_KEY]&token=[Token]");
+      $urlContents = file_get_contents("https://www.rescuetime.com/anapi/data?key=[API_KEY]&perspective=rank&interval=hour&restrict_begin=".date('Y-m-d')."&restrict_end=".date('Y-m-d')."&format=json");
+      $urlContentsY = file_get_contents("https://www.rescuetime.com/anapi/data?key=[API_KEY]&perspective=rank&interval=hour&restrict_begin=".date('d.m.Y',strtotime("-1 days"))."&restrict_end=".date('d.m.Y',strtotime("-1 days"))."&format=json");
+      $urlContents2 = file_get_contents("https://www.rescuetime.com/anapi/daily_summary_feed?key=[API_KEY]");
       $data = json_decode($urlContents,true);
       $dataY = json_decode($urlContentsY,true);
       $data2 = json_decode($urlContents2,true);
