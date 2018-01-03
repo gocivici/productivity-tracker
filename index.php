@@ -3,6 +3,8 @@ require "class.rgbcontrol.php";
 $led = new LedControl(17,22,24); # GPIO Pins on RPi
 
 $page = $_SERVER['PHP_SELF'];
+
+#Seconds to refresh the webpage
 $sec = "360";
 
 $testArray=
@@ -15,16 +17,21 @@ $testArray=
       $data2 = json_decode($urlContents2,true);
       $trelloData = json_decode($trelloUrl,true);
 
+#---------------------Test Commands-------------------
 #echo "Date= ".date('Y-m-d');
-
 #echo $data['rows'][0][3];
 #print_r($data);
 #print_r($data2);
 #print_r($dataY);
 #print_r($trelloData);
-$posTotal = 0;
-$negTotal = 0;
+#-----------------------------------------------------
+
+$posTotal = 0; #Positive seconds (seconds spent on a program times the productivity value)
+$negTotal = 0; #Negative seconds (seconds spent on a program times the productivity value)
 $absTotal = 0;
+
+
+#this for loop gets seconds spent from the json file
 foreach ($data['rows'] as $key => $value) {
   $productivity = $value[1] * $value[5];
   #print_r($productivity);
@@ -35,7 +42,7 @@ foreach ($data['rows'] as $key => $value) {
 {
    $negTotal = $negTotal + $productivity;
 }
-  $absTotal = $absTotal + abs($productivity);
+   $absTotal = $absTotal + abs($productivity);
 }
 
 #gets the categaories for each value
@@ -50,26 +57,30 @@ foreach ($data['rows'] as $key => $value) {
 }
 
 
-#LED control
-
+#--------LED control---------
+#You can change the color of the rgb LEDs by their HEX values.
 $oran=floor(100-(abs($negTotal)*100)/$absTotal);
 if ($oran<50) {
     $led->setHex("#FF0000");
 }else {
     $led->setHex("#00FF00");
 }
-#radar graph
-$js_array = json_encode($categoriesArray);
-#echo "var javascript_array = ". $js_array . ";\n";
+#----------------------------
 
+
+#radar graph data
+$js_array = json_encode($categoriesArray);
 $js_array2 = json_encode($seconds);
+#-------------Test Commands-------------
+#echo "var javascript_array = ". $js_array . ";\n";
 #echo "var javascript_array = ". $js_array2 . ";\n";
 #echo "Negative Total= ".$negTotal;
 #echo "<br>";
 #echo "Absolute Total= ".$absTotal;
+#---------------------------------------
 
-      #for radars yesterday data
 
+#gets the categaories for each value for yesterday
 $categoriesArrayY = array();
 $secondsY = array();
 $totalSecondsY = 0;
@@ -81,7 +92,7 @@ foreach ($dataY['rows'] as $key => $value) {
  #echo "<br>";
 }
 
-#radar graph
+#radar graph data for Yesterday
 $js_arrayY = json_encode($categoriesArrayY);
 #echo "var javascript_array = ". $js_array . ";\n";
 $js_array2Y = json_encode($secondsY);
@@ -93,14 +104,14 @@ $distractiveHours=array();
 $i=0;
 foreach ($data2 as $value) {
 
-if ($i<7) {
+  if ($i<7) {
 
-$productiveHours[]=$value['all_productive_hours'];
-$distractiveHours[]=$value['all_distracting_hours'];
-}
+    $productiveHours[]=$value['all_productive_hours'];
+    $distractiveHours[]=$value['all_distracting_hours'];
+  }
 
-$i=$i+1;
-
+  $i=$i+1;
+3
 }
 #print_r($productiveHours);
 #print_r($distractiveHours);
