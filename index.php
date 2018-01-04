@@ -13,9 +13,9 @@ $testArray=
       $urlContentsY = file_get_contents("https://www.rescuetime.com/anapi/data?key=[API_KEY]&perspective=rank&interval=hour&restrict_begin=".date('d.m.Y',strtotime("-1 days"))."&restrict_end=".date('d.m.Y',strtotime("-1 days"))."&format=json");
       $urlContents2 = file_get_contents("https://www.rescuetime.com/anapi/daily_summary_feed?key=[API_KEY]");
       $data = json_decode($urlContents,true);
-      $dataY = json_decode($urlContentsY,true);
-      $data2 = json_decode($urlContents2,true);
-      $trelloData = json_decode($trelloUrl,true);
+      $dataY = json_decode($urlContentsY,true); #rescuetime yesterday's data
+      $data2 = json_decode($urlContents2,true); #recuetime daily summary
+      $trelloData = json_decode($trelloUrl,true); #trello cards
 
 #---------------------Test Commands-------------------
 #echo "Date= ".date('Y-m-d');
