@@ -111,7 +111,6 @@ foreach ($data2 as $value) {
   }
 
   $i=$i+1;
-3
 }
 #print_r($productiveHours);
 #print_r($distractiveHours);
@@ -137,7 +136,7 @@ $js_distractiveHours = json_encode($distractiveHours);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
 
   <style type="text/css">
-
+  /* You can edit these parts to change the dimension, width,heigh of the graphs */
   #percent {
     position: relative;
   }
